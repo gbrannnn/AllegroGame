@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\Debug\AllegroGame.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\font.ttf</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\assets\boxT.png</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\assets\casa_di_piriquito.png</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\assets\npc_one_sprite.png</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\assets\player.png</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\bilol\source\repos\AllegroGame\assets\tree.png</FullPath>
+    </ContentFile>
+  </ContentFiles>
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
