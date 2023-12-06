@@ -19,6 +19,9 @@ const int SCREEN_HEIGHT = 768;
 const int binary_quest[] = {0,0,1,1};
 int countCheck = 0;
 
+char correct[200] = "ACERTO MISERAVEL!! \n parabens";
+char incorrect[200] = "Resposta errada, tente novamente";
+
 int main() {
     // ======================================================
     // ALLEGRO INIT
@@ -55,6 +58,7 @@ int main() {
     // ======================================================
     ALLEGRO_FONT* font = al_load_font("..\\font.ttf", 20, 0);
 
+    
 
     // ======================================================
     // REGISTRING EVENTS
@@ -110,12 +114,13 @@ int main() {
         {"WALL", 0, 64 * 2, 32, 48},
         {"WALL", 0, 64 * 3, 32, 48},
         {"WALL", 0, 64 * 4, 32, 48},
-        {"WALL", 0, 64 * 5, 0, 0},
-        {"WALL", 0, 64 * 6, 0, 0},
+        {"WALL", 0, 64 * 5, 32, 48},
+        {"WALL", 0, 64 * 6, 32, 48},
         {"WALL", 0, 64 * 7, 32, 48},
         {"WALL", 0, 64 * 8, 32, 48},
         {"WALL", 0, 64 * 9, 32, 48},
         {"WALL", 0, 64 * 10, 32, 48},
+        
     };
    
     WALL bottomWals[16] = {
@@ -135,6 +140,7 @@ int main() {
         { "WALL", 64 * 13, 64 * 11, 32, 48 },
         { "WALL", 64 * 14, 64 * 11, 32, 48 },
         { "WALL", 64 * 15, 64 * 11, 32, 48 },
+
     };
     BUTTON numbersButtons[4] = {
         {"BUTTON", 500, 400, 35, 35, 0, -1},
@@ -143,10 +149,10 @@ int main() {
         {"BUTTON", 500 * 1.3, 400, 35, 35, 0, -1}
     };
     BUTTON checkButtons[1] = {
-        {"BUTTON", 500 * 1.15, 400 * 1.25, 45, 45, 0, -1}
+        {"BUTTON", 500 * 1.15, 400 * 1.25, 35, 35, 0, -1}
     };
     NPC npc_collisions[1] = {
-        { "NPC", 200, 400, 16, 16, "Ola eu sou um NPC \n Esse e um teste de quebra de linhas", false }
+        { "NPC", 200, 400, 16, 16, "Ola mero mortal, tenho um desafio para voce!!", false }
     };
 
 
@@ -222,16 +228,17 @@ int main() {
                 checkButtons[i].POSX,
                 checkButtons[i].POSY,
                 0
-            ); checkCollisionWithButton2(&player, &checkButtons[i]);
+            ); checkCollisionWithButton(&player, &checkButtons[i]);
         }
 
         if (checkButtons[0].VALUE > 0) {
             if (countCheck >= 4) {
-                drawTextBox(al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "ACERTO MISERAVEL!!"), &npc_collisions[0], &font);
-                
+                al_draw_scaled_bitmap(textBox, 0, 0, 144, 64, npc_collisions[0].POSX, npc_collisions[0].POSY - 144, 144 * 3, 64 * 2, 0);
+                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 15, npc_collisions[0].POSY - 130, 0, correct);
             }
             else {
-                al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "ERROOUU!!");
+                al_draw_scaled_bitmap(textBox, 0, 0, 144, 64, npc_collisions[0].POSX, npc_collisions[0].POSY - 144, 144 * 3, 64 * 2, 0);
+                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 15, npc_collisions[0].POSY - 130, 0, incorrect);
             }
         }
          
@@ -258,7 +265,7 @@ int main() {
 
         
         // Drawing bottom walls
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 16 ; i++) {
             al_draw_scaled_bitmap(
                 wallSprite, 
                 0, 
@@ -275,7 +282,7 @@ int main() {
         }
 
         for (int i = 0; i < 1; i++) {
-            checkCollisionWithNpc(&player, &npc_collisions[i], textBox, font, drawTextBox);
+            checkCollisionWithNpc(&player, &npc_collisions[i], textBox, font, drawTextBoxNpc);
         }
 
 

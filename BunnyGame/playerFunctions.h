@@ -113,61 +113,14 @@ void checkCollisionWithButton(PLAYER* player, BUTTON* button) {
 		buttony >= player->POSY
 		) {
 
-		int timer = al_create_timer(2);
-		al_start_timer(timer);
-
-		while(timer != 0){
-			button->ISCOLLIDING = button->ISCOLLIDING * (-1);
-		}
-
-
-		if (button->ISCOLLIDING > 0) {
-			button->VALUE = 1;
-		}
-		else {
-			button->VALUE = 0;
-		}
-
-		// Push player to the oppsite direction to not get stuck
-		if (player->PLAYERDIR == 0) player->POSY -= pushBack;
-		if (player->PLAYERDIR == 1) player->POSY += pushBack;
-		if (player->PLAYERDIR == 2) player->POSX += pushBack;
-		if (player->PLAYERDIR == 3) player->POSX -= pushBack;
-
-		return true;
-
-	}
-	
-	return false;
-}
-
-void checkCollisionWithButton2(PLAYER* player, BUTTON* button) {
-	int pushBack = 20;
-
-	int playerBottomRightX = player->POSX + 48;
-	int playerBottomRightY = player->POSY + 48;
-
-	int buttonX = button->POSX - 10;
-	int buttony = button->POSY - 10; 
-
-	float playerVel = player->VELOCITY;
-
-	if (button->POSX <= playerBottomRightX &&
-		buttonX >= player->POSX &&
-		button->POSY <= playerBottomRightY &&
-		buttony >= player->POSY
-		) {
-
 		button->ISCOLLIDING = button->ISCOLLIDING * (-1);
-
-
+		 
 		if (button->ISCOLLIDING > 0) {
 			button->VALUE = 1;
 		}
 		else {
 			button->VALUE = 0;
 		}
-		
 
 		// Push player to the oppsite direction to not get stuck
 		if (player->PLAYERDIR == 0) player->POSY -= pushBack;
@@ -181,7 +134,6 @@ void checkCollisionWithButton2(PLAYER* player, BUTTON* button) {
 	
 	return false;
 }
-
 
 void checkButtonResult(int binary_quest[], int binary_result[], int countCheck) {
 	for (int i = 0; i < 4; i++) {
@@ -195,7 +147,14 @@ void checkButtonResult(int binary_quest[], int binary_result[], int countCheck) 
 }
 
 //Draw text Box
-void drawTextBox(ALLEGRO_BITMAP* sprite, ALLEGRO_FONT* font, NPC* npc) {
-	al_draw_scaled_bitmap(sprite, 0, 0, 144, 64, npc->POSX, npc->POSY - 144, 144 * 2, 64 * 2, 0);
-	
+void drawTextBoxNpc(ALLEGRO_BITMAP* sprite, ALLEGRO_FONT* font, NPC* npc) {
+	al_draw_scaled_bitmap(sprite, 0, 0, 144, 64, npc->POSX, npc->POSY - 144, 144 * 4, 64 * 2, 0);
+	al_draw_text(font, al_map_rgb(255, 255, 255), npc->POSX + 20, npc->POSY - 130, 0, npc->lines);
+	al_draw_text(font, al_map_rgb(255, 255, 255), npc->POSX + 20, npc->POSY - 100, 0, "Escreva com esses botoes 3 na base binaria");
+	al_draw_text(font, al_map_rgb(255, 255, 255), npc->POSX + 20, npc->POSY - 70, 0, "Duvido que vai conseguir!!!");
+};
+
+void drawTextBox(ALLEGRO_BITMAP* sprite, ALLEGRO_FONT* font, NPC* npc, char text) {
+	al_draw_scaled_bitmap(sprite, 0, 0, 144, 64, npc->POSX, npc->POSY - 144, 144 * 5, 64 * 2, 0);
+	al_draw_text(font, al_map_rgb(255, 255, 255), npc->POSX + 15, npc->POSY - 130, 0, text);
 };
