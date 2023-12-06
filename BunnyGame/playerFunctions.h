@@ -96,7 +96,52 @@ void checkCollisionWithNpc(PLAYER* player, NPC* npc, ALLEGRO_BITMAP* sprite, ALL
 }
 
 // Colission with Buttons
-void checkCollisionWithButton(PLAYER* player, BUTTON* button, int binary_result[]) {
+void checkCollisionWithButton(PLAYER* player, BUTTON* button) {
+	int pushBack = 20;
+
+	int playerBottomRightX = player->POSX + 48;
+	int playerBottomRightY = player->POSY + 48;
+
+	int buttonX = button->POSX - 10;
+	int buttony = button->POSY - 10; 
+
+	float playerVel = player->VELOCITY;
+
+	if (button->POSX <= playerBottomRightX &&
+		buttonX >= player->POSX &&
+		button->POSY <= playerBottomRightY &&
+		buttony >= player->POSY
+		) {
+
+		int timer = al_create_timer(2);
+		al_start_timer(timer);
+
+		while(timer != 0){
+			button->ISCOLLIDING = button->ISCOLLIDING * (-1);
+		}
+
+
+		if (button->ISCOLLIDING > 0) {
+			button->VALUE = 1;
+		}
+		else {
+			button->VALUE = 0;
+		}
+
+		// Push player to the oppsite direction to not get stuck
+		if (player->PLAYERDIR == 0) player->POSY -= pushBack;
+		if (player->PLAYERDIR == 1) player->POSY += pushBack;
+		if (player->PLAYERDIR == 2) player->POSX += pushBack;
+		if (player->PLAYERDIR == 3) player->POSX -= pushBack;
+
+		return true;
+
+	}
+	
+	return false;
+}
+
+void checkCollisionWithButton2(PLAYER* player, BUTTON* button) {
 	int pushBack = 20;
 
 	int playerBottomRightX = player->POSX + 48;
@@ -122,8 +167,7 @@ void checkCollisionWithButton(PLAYER* player, BUTTON* button, int binary_result[
 		else {
 			button->VALUE = 0;
 		}
-
-		binary_result = button->VALUE;
+		
 
 		// Push player to the oppsite direction to not get stuck
 		if (player->PLAYERDIR == 0) player->POSY -= pushBack;
@@ -138,57 +182,14 @@ void checkCollisionWithButton(PLAYER* player, BUTTON* button, int binary_result[
 	return false;
 }
 
-void checkCollisionWithButton2(PLAYER* player, BUTTON* button, int binary_result[], int binary_quest[], int countCheck, void (*callBack)()) {
-	int pushBack = 20;
-
-	int playerBottomRightX = player->POSX + 48;
-	int playerBottomRightY = player->POSY + 48;
-
-	int buttonX = button->POSX - 10;
-	int buttony = button->POSY - 10;
-
-	float playerVel = player->VELOCITY;
-
-	if (button->POSX <= playerBottomRightX &&
-		buttonX >= player->POSX &&
-		button->POSY <= playerBottomRightY &&
-		buttony >= player->POSY
-		) {
-
-		button->ISCOLLIDING = button->ISCOLLIDING * (-1);
-
-		if (button->ISCOLLIDING > 0) {
-			button->VALUE = 1;
-		}
-		else {
-			button->VALUE = 0;
-		}
-
-		for (int i = 0; i < 4; i++) {
-			if (binary_result[i] == binary_quest[i]) {
-				countCheck += 1;
-			}
-		}
-
-		callBack(binary_quest, binary_result, countCheck);
-
-		// Push player to the oppsite direction to not get stuck
-		if (player->PLAYERDIR == 0) player->POSY -= pushBack;
-		if (player->PLAYERDIR == 1) player->POSY += pushBack;
-		if (player->PLAYERDIR == 2) player->POSX += pushBack;
-		if (player->PLAYERDIR == 3) player->POSX -= pushBack;
-
-		return true;
-
-	}
-
-	return false;
-}
 
 void checkButtonResult(int binary_quest[], int binary_result[], int countCheck) {
 	for (int i = 0; i < 4; i++) {
-		if (binary_result[i] == binary_quest[i]) {
-			countCheck += 1;
+		if (binary_result[i] != binary_quest[i]) {
+			return 0;
+		}
+		else {
+			return countCheck += 1;
 		}
 	}
 }

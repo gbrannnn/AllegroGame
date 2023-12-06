@@ -17,8 +17,7 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 const int binary_quest[] = {0,0,1,1};
-int binary_result[4];
-const int countCheck = 0;
+int countCheck = 0;
 
 int main() {
     // ======================================================
@@ -73,7 +72,7 @@ int main() {
     //                X    Y     DIR VEL  ISCOLI  CANMOVE   INSIGNAAS
     PLAYER player = { 200, 200,  0,  7.0, false,  true,     {0}};
 
-    WALL walls[48] = {
+    WALL walls[38] = {
         // TOP 16 WALLS
         {"WALL", 64 * 0,   0, 32, 48},
         {"WALL", 64 * 1,   0, 32, 48},
@@ -104,31 +103,22 @@ int main() {
         {"WALL", 64 * 15, 64 * 8, 32, 48},
         {"WALL", 64 * 15, 64 * 9, 32, 48},
         {"WALL", 64 * 15, 64 * 10, 32, 48},
-        {"WALL", 64 * 15, 64 * 11, 32, 48},
-        {"WALL", 64 * 15, 64 * 12, 32, 48},
-        {"WALL", 64 * 15, 64 * 13, 32, 48},
-        {"WALL", 64 * 15, 64 * 14, 32, 48},
-        {"WALL", 64 * 15, 64 * 15, 32, 48},
 
+        // TOP LEFT
         {"WALL", 0, 64 * 0, 32, 48},
         {"WALL", 0, 64 * 1, 32, 48},
         {"WALL", 0, 64 * 2, 32, 48},
         {"WALL", 0, 64 * 3, 32, 48},
         {"WALL", 0, 64 * 4, 32, 48},
-        {"WALL", 0, 64 * 5, 32, 48},
-        {"WALL", 0, 64 * 6, 32, 48},
+        {"WALL", 0, 64 * 5, 0, 0},
+        {"WALL", 0, 64 * 6, 0, 0},
         {"WALL", 0, 64 * 7, 32, 48},
         {"WALL", 0, 64 * 8, 32, 48},
         {"WALL", 0, 64 * 9, 32, 48},
         {"WALL", 0, 64 * 10, 32, 48},
-        {"WALL", 0, 64 * 11, 32, 48},
-        {"WALL", 0, 64 * 12, 32, 48},
-        {"WALL", 0, 64 * 13, 32, 48},
-        {"WALL", 0, 64 * 14, 32, 48},
-        {"WALL", 0, 64 * 15, 32, 48},
     };
    
-    WALL bottomWals[15] = {
+    WALL bottomWals[16] = {
         { "WALL", 64 *0,  64 * 11, 32,48 },
         { "WALL", 64 * 1,  64 * 11, 32, 48 },
         { "WALL", 64 * 2,  64 * 11, 32, 48 },
@@ -143,7 +133,8 @@ int main() {
         { "WALL", 64 * 11, 64 * 11, 32, 48 },
         { "WALL", 64 * 12, 64 * 11, 32, 48 },
         { "WALL", 64 * 13, 64 * 11, 32, 48 },
-        { "WALL", 64 * 14, 64 * 11, 32, 48 }
+        { "WALL", 64 * 14, 64 * 11, 32, 48 },
+        { "WALL", 64 * 15, 64 * 11, 32, 48 },
     };
     BUTTON numbersButtons[4] = {
         {"BUTTON", 500, 400, 35, 35, 0, -1},
@@ -152,7 +143,7 @@ int main() {
         {"BUTTON", 500 * 1.3, 400, 35, 35, 0, -1}
     };
     BUTTON checkButtons[1] = {
-        {"BUTTON", 500 * 1.15, 400 * 1.25, 35, 35, 0}
+        {"BUTTON", 500 * 1.15, 400 * 1.25, 45, 45, 0, -1}
     };
     NPC npc_collisions[1] = {
         { "NPC", 200, 400, 16, 16, "Ola eu sou um NPC \n Esse e um teste de quebra de linhas", false }
@@ -182,10 +173,11 @@ int main() {
 
         
         // ======================================================
-        // RENDERING
+        // RENDERIN
         // ======================================================
 
         al_clear_to_color(al_map_rgb(87, 152, 105, 255));
+
 
         // Drawing numbers buttons
         for (int i = 0; i < 4; i++) {
@@ -213,8 +205,15 @@ int main() {
                     0
                 );
             }
-            checkCollisionWithButton(&player, &numbersButtons[i], &binary_result[i]);
+            checkCollisionWithButton(&player, &numbersButtons[i]);
+            if (numbersButtons[i].VALUE != binary_quest[i]) {
+                countCheck = 0;
+            }
+            else {
+                countCheck += 1;
+            }
         }
+
 
         //Dwaing check buttons
         for (int i = 0; i < 1; i++) {
@@ -223,16 +222,21 @@ int main() {
                 checkButtons[i].POSX,
                 checkButtons[i].POSY,
                 0
-            ); checkCollisionWithButton2(&player, &checkButtons[i], &binary_result, &binary_result, &countCheck, checkButtonResult);
-        }
-        
-
-        if (countCheck == 1) {
-            al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "ACERTO MISERAVEL!!");
+            ); checkCollisionWithButton2(&player, &checkButtons[i]);
         }
 
+        if (checkButtons[0].VALUE > 0) {
+            if (countCheck >= 4) {
+                drawTextBox(al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "ACERTO MISERAVEL!!"), &npc_collisions[0], &font);
+                
+            }
+            else {
+                al_draw_text(font, al_map_rgb(255, 255, 255), 200, 200, 0, "ERROOUU!!");
+            }
+        }
+         
         // Drawing left/top/rigth wall
-        for (int i = 0; i < 48; i++) {
+        for (int i = 0; i < 38; i++) {
             al_draw_scaled_bitmap(
                 wallSprite,
                 0,
@@ -254,7 +258,7 @@ int main() {
 
         
         // Drawing bottom walls
-        for (int i = 0; i < 15  ; i++) {
+        for (int i = 0; i < 16; i++) {
             al_draw_scaled_bitmap(
                 wallSprite, 
                 0, 
