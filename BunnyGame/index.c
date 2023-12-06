@@ -19,7 +19,10 @@ const int SCREEN_HEIGHT = 768;
 const int binary_quest[] = {0,0,1,1};
 int countCheck = 0;
 
-char correct[200] = "ACERTO MISERAVEL!! \n parabens";
+char correct[200] = "PARABENS ACERTOU!!! Voce sabe que 3 em binario e 0011, para";
+char correct_2[200] = "chegar nesse resultado e necessario saber que dividir o 3 por 2,";
+char correct_3[200] = " e ir guardando os valores que sobram e junta los formara 0011";
+
 char incorrect[200] = "Resposta errada, tente novamente";
 
 int main() {
@@ -233,8 +236,10 @@ int main() {
 
         if (checkButtons[0].VALUE > 0) {
             if (countCheck >= 4) {
-                al_draw_scaled_bitmap(textBox, 0, 0, 144, 64, npc_collisions[0].POSX, npc_collisions[0].POSY - 144, 144 * 3, 64 * 2, 0);
-                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 15, npc_collisions[0].POSY - 130, 0, correct);
+                al_draw_scaled_bitmap(textBox, 0, 0, 144, 64, npc_collisions[0].POSX, npc_collisions[0].POSY - 144, 144 * 5, 64 * 2, 0);
+                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 25, npc_collisions[0].POSY - 130, 0, correct);
+                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 25, npc_collisions[0].POSY - 100, 0, correct_2);
+                al_draw_text(font, al_map_rgb(255, 255, 255), npc_collisions[0].POSX + 25, npc_collisions[0].POSY - 70, 0, correct_3);
             }
             else {
                 al_draw_scaled_bitmap(textBox, 0, 0, 144, 64, npc_collisions[0].POSX, npc_collisions[0].POSY - 144, 144 * 3, 64 * 2, 0);

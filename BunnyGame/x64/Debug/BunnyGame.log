@@ -1,1 +1,20 @@
-﻿  BunnyGame.vcxproj -> C:\Users\wwwgu\Documents\BunnyGame\BunnyGame\x64\Debug\BunnyGame.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: O diretório intermediário (x64\Debug\) contém arquivos compartilhados de outro projeto (BunnyGame.vcxproj). Isso pode levar a um comportamento incorreto de limpeza e recompilação.
+  index.c
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(8,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(9,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(10,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(11,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(14,10): warning C4067: tokens inesperados após diretiva de pré-processador - esperado um newline
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(62,14): warning C4098: 'checkCollisionWithWalls': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(65,14): warning C4098: 'checkCollisionWithWalls': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(91,14): warning C4098: 'checkCollisionWithNpc': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(94,14): warning C4098: 'checkCollisionWithNpc': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(131,14): warning C4098: 'checkCollisionWithButton': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(135,14): warning C4098: 'checkCollisionWithButton': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(141,12): warning C4098: 'checkButtonResult': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(144,26): warning C4098: 'checkButtonResult': função 'void' retornando um valor
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(159,84): warning C4047: 'função': 'const char *' difere em níveis de indireção de 'char'
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\playerFunctions.h(159,84): warning C4024: 'al_draw_text': tipos diferentes para parâmetro formal e real 6
+C:\Users\bilol\source\repos\AllegroGame\BunnyGame\index.c(185,52): warning C4020: 'al_map_rgb': muitos parâmetros reais
+  player.h
+  BunnyGame.vcxproj -> C:\Users\bilol\Source\Repos\AllegroGame\x64\Debug\AllegroGame.exe
